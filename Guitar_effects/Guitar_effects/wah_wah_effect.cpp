@@ -21,7 +21,7 @@ namespace GE
 		std::vector <double> yh;
 		std::vector <double> yb;
 		std::vector <double> yl;
-		std::vector <sf::Int16> YB;
+		std::vector <sf::Int16> Y;
 
 		double delta = Fw / buffer.getSampleRate();
 
@@ -62,9 +62,9 @@ namespace GE
 
 		for (int i = 0; i < buffer.getSampleCount(); i++)
 		{
-			YB.push_back((sf::Int16) ((yb[i] / maxb)* 32000.f));
+			Y.push_back((sf::Int16) ((yb[i] / maxb)* power2));
 		}
 
-		buffer.loadFromSamples( &YB[0], buffer.getSampleCount(), 1, 44100);
+		buffer.loadFromSamples( &Y[0], buffer.getSampleCount(), 1, buffer.getSampleRate());
 	}
 }

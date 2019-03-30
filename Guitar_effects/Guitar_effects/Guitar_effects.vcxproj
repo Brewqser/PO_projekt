@@ -124,11 +124,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="overdrive_effect.cpp" />
     <ClCompile Include="wah_wah_effect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="definitions.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="overdrive_effect.h" />
     <ClInclude Include="wah_wah_effect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
