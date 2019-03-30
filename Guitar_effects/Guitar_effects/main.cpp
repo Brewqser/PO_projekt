@@ -1,24 +1,36 @@
-#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
+#include <string>
+#include <memory>
+#include "effect.h"
+#include "wah_wah_effect.h"
+
+using namespace std;
+
+string path = "Sounds/test_gs.wav";
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-	while (window.isOpen())
+	sf::SoundBuffer buffer;
+	if ( buffer.loadFromFile(path) )  cout << " dziala " << endl;
+	else
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		window.clear();
-		window.draw(shape);
-		window.display();
+		cout << "nie dziala" << endl;
+		return 0;
 	}
 
-	return 0;
+	cout << buffer.getSampleCount() << " " << buffer.getSampleRate() << " " <<  (double)buffer.getSampleCount() / (double) buffer.getSampleRate() << " " << buffer.getChannelCount();
+	cout << endl << buffer.getDuration().asMilliseconds() << endl;
+
+	std::unique_ptr<GE::effect> eff;
+
+	eff = make_unique <GE::wah_wah_effect> ();
+	eff->process(buffer);
+
+	sf::Sound sound;
+	sound.setBuffer(buffer);
+	sound.play();
+
+	system("pause");
 }
+
