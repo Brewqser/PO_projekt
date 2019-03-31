@@ -4,7 +4,9 @@
 #include <memory>
 #include "effect.h"
 #include "wah_wah_effect.h"
-#include "overdrive_effect.h"
+#include "fuzz_effect.h"
+#include "delay_effect.h"
+#include "ring_effect.h"
 
 using namespace std;
 
@@ -28,13 +30,16 @@ int main()
 
 	sf::Sound sound;
 	sound.setBuffer(buffer);
-	sound.play();
+	//sound.play();
 
-	int a;
-	cin >> a;
+//	int a;
+	//cin >> a;
 
 	//eff = make_unique <GE::wah_wah_effect> ();
-	eff = make_unique <GE::overdrive_effect>();
+	//eff = make_unique <GE::fuzz_effect>();
+	//eff = make_unique <GE::ring_effect>(); 
+	eff = make_unique <GE::delay_effect>();
+
 	eff->process(buffer);
 	sound.setBuffer(buffer);
 	sound.play();

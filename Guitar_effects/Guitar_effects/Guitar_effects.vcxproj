@@ -123,14 +123,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="delay_effect.cpp" />
+    <ClCompile Include="fuzz_effect.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="overdrive_effect.cpp" />
+    <ClCompile Include="ring_effect.cpp" />
     <ClCompile Include="wah_wah_effect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="definitions.h" />
+    <ClInclude Include="delay_effect.h" />
     <ClInclude Include="effect.h" />
-    <ClInclude Include="overdrive_effect.h" />
+    <ClInclude Include="fuzz_effect.h" />
+    <ClInclude Include="ring_effect.h" />
     <ClInclude Include="wah_wah_effect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
