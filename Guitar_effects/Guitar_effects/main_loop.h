@@ -28,7 +28,8 @@ namespace GE
 		std::string _filename;
 
 		std::vector <sf::Text> _texts;
-		std::vector <sf::RectangleShape> _buttons;
+		std::vector <sf::Sprite> _buttons;
+		sf::Texture _texture[10];
 		sf::Font _font;
 	};
 }
