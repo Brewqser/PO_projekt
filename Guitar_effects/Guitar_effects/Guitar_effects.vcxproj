@@ -126,6 +126,7 @@
     <ClCompile Include="delay_effect.cpp" />
     <ClCompile Include="fuzz_effect.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="main_loop.cpp" />
     <ClCompile Include="ring_effect.cpp" />
     <ClCompile Include="wah_wah_effect.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="delay_effect.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="fuzz_effect.h" />
+    <ClInclude Include="main_loop.h" />
     <ClInclude Include="ring_effect.h" />
     <ClInclude Include="wah_wah_effect.h" />
   </ItemGroup>

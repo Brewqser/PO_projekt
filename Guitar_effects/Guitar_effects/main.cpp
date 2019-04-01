@@ -7,6 +7,9 @@
 #include "fuzz_effect.h"
 #include "delay_effect.h"
 #include "ring_effect.h"
+#include "main_loop.h"
+
+#include "definitions.h"
 
 using namespace std;
 
@@ -14,6 +17,10 @@ string path = "Sounds/test_gs.wav";
 
 int main()
 {
+	GE::main_loop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
+
+	/*
+	
 	sf::SoundBuffer buffer;
 	if ( buffer.loadFromFile(path) )  cout << " dziala " << endl;
 	else
@@ -35,15 +42,21 @@ int main()
 //	int a;
 	//cin >> a;
 
-	//eff = make_unique <GE::wah_wah_effect> ();
-	//eff = make_unique <GE::fuzz_effect>();
-	//eff = make_unique <GE::ring_effect>(); 
+
 	eff = make_unique <GE::delay_effect>();
 
 	eff->process(buffer);
+	eff = make_unique <GE::wah_wah_effect> ();
+	eff->process(buffer);
+	//eff = make_unique <GE::fuzz_effect>();
+	//eff->process(buffer);
+	//eff = make_unique <GE::ring_effect>(); 
+	//eff->process(buffer);
+
 	sound.setBuffer(buffer);
 	sound.play();
+	*/
 
-	system("pause");
+	//system("pause");
 }
 
