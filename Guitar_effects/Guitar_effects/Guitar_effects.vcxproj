@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="delay_effect.cpp" />
+    <ClCompile Include="file_manager.cpp" />
     <ClCompile Include="fuzz_effect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_loop.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="definitions.h" />
     <ClInclude Include="delay_effect.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="file_manager.h" />
     <ClInclude Include="fuzz_effect.h" />
     <ClInclude Include="main_loop.h" />
     <ClInclude Include="ring_effect.h" />

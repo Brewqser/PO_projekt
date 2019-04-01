@@ -16,15 +16,15 @@ enum main_loop_state
 	read,
 	work,
 	process,
-	save,
+	playing
 };
 
 enum buttons
 {
 	playorg,
 	playout,
-	pauseorg,
-	pauseout,
-	load
+	pause,
+	load,
+	save
 };
 

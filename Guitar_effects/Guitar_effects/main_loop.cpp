@@ -7,6 +7,7 @@ namespace GE
 	{
 		_state = main_loop_state::work;
 		_filename = "";
+		_isplaying = 0;
 
 		sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 		_data->window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), title, sf::Style::Close | sf::Style::Titlebar);
@@ -36,37 +37,87 @@ namespace GE
 					_data->window.close();
 				}
 
-
 				// handle input
+				if (_state == main_loop_state::work)
+				{
+					if (event.type == sf::Event::MouseButtonPressed)
+					{
+						if ((_buttons[buttons::load].getColor() != sf::Color::Transparent ) && _buttons[buttons::load].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
+						{
+							//std::cout << "Pressed Load button" << std::endl;
+							_state = main_loop_state::read;
+						}
+						if ((_buttons[buttons::save].getColor() != sf::Color::Transparent) && _buttons[buttons::save].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
+						{
+							std::cout << "Pressed Save button" << std::endl;
+						}
+						if ((_buttons[buttons::playorg].getColor() != sf::Color::Transparent) && _buttons[buttons::playorg].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
+						{
+							std::cout << "Pressed playorg button" << std::endl;
+							_state = main_loop_state::playing;
+							sound.setBuffer(  fManager.playorg() ) ;
+							sound.play();
+						}
+						if ((_buttons[buttons::playout].getColor() != sf::Color::Transparent) && _buttons[buttons::playout].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
+						{
+							std::cout << "Pressed playout button" << std::endl;
+
+						}
+					}
+				}
 				if (_state == main_loop_state::read)
 				{
-					if (event.type == sf::Event::TextEntered)
+					//
+					if (fManager.loadfile(event) != 2)
 					{
-						if ((char)event.text.unicode == 8)
+						if (fManager.loadfile(event) == 1)
 						{
-							if (_filename.size() > 0)
-							{
-								_filename.erase(_filename.begin() + _filename.size() - 1);
-							}
+							_buttons[buttons::load].setColor(sf::Color::White);
+							_buttons[buttons::playout].setColor(sf::Color::White);
+							_buttons[buttons::playorg].setColor(sf::Color::White);
+							_texts[2].setFillColor(sf::Color::Transparent);
 						}
 						else
 						{
-							_filename = _filename + (char)event.text.unicode;
+							_buttons[buttons::playorg].setColor(sf::Color::Transparent);
+							_buttons[buttons::pause].setColor(sf::Color::Transparent);
+							_buttons[buttons::playout].setColor(sf::Color::Transparent);
+							_buttons[buttons::save].setColor(sf::Color::Transparent);
+							_texts[2].setFillColor(sf::Color::Red);
 						}
 
-						std::cout << event.text.unicode << " " << _filename << std::endl;
+						_state = main_loop_state::work;
 					}
 				}
-
+				if (_state == main_loop_state::playing)
+				{
+					if (event.type == sf::Event::MouseButtonPressed)
+					{
+						if ((_buttons[buttons::pause].getColor() != sf::Color::Transparent) && _buttons[buttons::pause].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
+						{
+							_state = main_loop_state::work;
+							sound.stop();
+						}
+					}
+					// elapsed time !!!!
+				}
 			}
 
 
 			// update
 			if (_state == main_loop_state::read)
 			{
-				filename.setString(_filename);
+				filename.setString(fManager.getFileName());
 				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
-				//std::cout << filename.getGlobalBounds().height / 2 << std::endl;
+			}
+
+			if (_state == main_loop_state::playing)
+			{
+				_buttons[buttons::playorg].setColor(sf::Color::Transparent);
+				_buttons[buttons::pause].setColor(sf::Color::White);
+				_buttons[buttons::playout].setColor(sf::Color::Transparent);
+				_buttons[buttons::save].setColor(sf::Color::Transparent);
+				_buttons[buttons::load].setColor(sf::Color::Transparent);
 			}
 
 
@@ -79,20 +130,18 @@ namespace GE
 				_data->window.draw(filename);
 			}
 
-			if (_state == main_loop_state::work )
+			if (_state == main_loop_state::work || _state == main_loop_state::playing )
 			{
 				for (unsigned int i = 0; i < _buttons.size(); i++)
 				{
 					_data->window.draw(_buttons[i]);
 				}
-				//_data->window.draw(_texts[0]);
+
 				for (unsigned int i = 0; i < _texts.size(); i++)
 				{
 					_data->window.draw(_texts[i]);
 				}
-
 			}
-
 
 			_data->window.display();
 		}
@@ -121,28 +170,25 @@ namespace GE
 		_texture[1].loadFromFile(Pause_Button_Filepath);
 
 		_buttons[2].setTexture(_texture[1]);
-		_buttons[3].setTexture(_texture[1]);
 
-		_buttons[2].setPosition(SCREEN_WIDHT - 2 * (_buttons[2].getGlobalBounds().width + 30), SCREEN_HEIGHT - 2 * (_buttons[2].getGlobalBounds().height + 20));
-		_buttons[3].setPosition(SCREEN_WIDHT - 2 * (_buttons[3].getGlobalBounds().width + 30), SCREEN_HEIGHT - _buttons[3].getGlobalBounds().height - 20);
-
+		_buttons[2].setPosition(SCREEN_WIDHT / 2 -  (_buttons[2].getGlobalBounds().width / 2), SCREEN_HEIGHT  / 2 - (_buttons[2].getGlobalBounds().height / 2));
+		
 		_texture[2].loadFromFile(Load_Button_Filepath);
 
-		_buttons[4].setTexture(_texture[2]);
+		_buttons[3].setTexture(_texture[2]);
 
-		_buttons[4].setPosition(SCREEN_WIDHT - _buttons[4].getGlobalBounds().width - 30, SCREEN_HEIGHT - 2 * (_buttons[4].getGlobalBounds().height + 20));
+		_buttons[3].setPosition(SCREEN_WIDHT - _buttons[3].getGlobalBounds().width - 30, SCREEN_HEIGHT - 2 * (_buttons[3].getGlobalBounds().height + 20));
 		
 		_texture[3].loadFromFile(Save_Button_Filepath);
 
-		_buttons[5].setTexture(_texture[3]);
+		_buttons[4].setTexture(_texture[3]);
 
-		_buttons[5].setPosition(SCREEN_WIDHT - _buttons[5].getGlobalBounds().width - 30, SCREEN_HEIGHT - (_buttons[5].getGlobalBounds().height + 20));
+		_buttons[4].setPosition(SCREEN_WIDHT - _buttons[4].getGlobalBounds().width - 30, SCREEN_HEIGHT - (_buttons[4].getGlobalBounds().height + 20));
 
 		_buttons[0].setColor(sf::Color::Transparent);
 		_buttons[1].setColor(sf::Color::Transparent);
 		_buttons[2].setColor(sf::Color::Transparent);
-		_buttons[3].setColor(sf::Color::Transparent);
-		_buttons[5].setColor(sf::Color::Transparent);
+		_buttons[4].setColor(sf::Color::Transparent);
 
 		sf::Text txt;
 		txt.setFont(_font);
@@ -152,5 +198,10 @@ namespace GE
 		txt.setString("Output File");
 		_texts.push_back(txt);
 		_texts[1].setPosition(SCREEN_WIDHT - 3 * (_buttons[0].getGlobalBounds().width + 40), SCREEN_HEIGHT - 1 * (_texts[1].getGlobalBounds().height + 32));
+		txt.setString("File doesn`t exist");
+		_texts.push_back(txt);
+		_texts[2].setPosition(SCREEN_WIDHT / 2 - _texts[2].getGlobalBounds().width / 2, SCREEN_HEIGHT / 3);
+
+		_texts[2].setFillColor(sf::Color::Transparent);
 	}
 }

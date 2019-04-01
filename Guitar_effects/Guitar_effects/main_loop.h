@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "definitions.h"
 #include "string"
+#include "file_manager.h"
 
 namespace GE
 {
@@ -23,6 +24,8 @@ namespace GE
 		void run();
 		void init();
 
+		bool _isplaying;
+
 		DataRef _data = std::make_shared<Data>();
 		main_loop_state _state;
 		std::string _filename;
@@ -31,5 +34,9 @@ namespace GE
 		std::vector <sf::Sprite> _buttons;
 		sf::Texture _texture[10];
 		sf::Font _font;
+
+		filemanager fManager;
+
+		sf::Sound sound;
 	};
 }

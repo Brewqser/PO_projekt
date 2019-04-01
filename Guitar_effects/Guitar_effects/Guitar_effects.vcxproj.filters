@@ -33,6 +33,9 @@
     <ClCompile Include="main_loop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="effect.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main_loop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

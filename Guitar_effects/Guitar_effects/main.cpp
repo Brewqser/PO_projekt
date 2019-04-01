@@ -20,9 +20,8 @@ int main()
 	GE::main_loop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
 
 	/*
-	
 	sf::SoundBuffer buffer;
-	if ( buffer.loadFromFile(path) )  cout << " dziala " << endl;
+	if ( buffer.loadFromFile("test.wav") )  cout << " dziala " << endl;
 	else
 	{
 		cout << "nie dziala" << endl;
@@ -32,11 +31,14 @@ int main()
 	cout << buffer.getSampleCount() << " " << buffer.getSampleRate() << " " <<  (double)buffer.getSampleCount() / (double) buffer.getSampleRate() << " " << buffer.getChannelCount();
 	cout << endl << buffer.getDuration().asMilliseconds() << endl;
 
-	std::unique_ptr<GE::effect> eff;
+	//std::unique_ptr<GE::effect> eff;
 
 
 	sf::Sound sound;
 	sound.setBuffer(buffer);
+	sound.play();
+
+	/*
 	//sound.play();
 
 //	int a;
