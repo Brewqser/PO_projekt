@@ -25,6 +25,8 @@ namespace GE
 		void init();
 
 		bool _loaded;
+		bool _saveReady;
+		bool _saved;
 		bool _isplaying;
 
 		DataRef _data = std::make_shared<Data>();

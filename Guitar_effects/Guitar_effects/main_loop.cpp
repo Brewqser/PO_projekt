@@ -9,6 +9,8 @@ namespace GE
 		_filename = "";
 		_isplaying = 0;
 		_loaded = 0;
+		_saveReady = 0;
+		_saved = 0;
 
 		sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 		_data->window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), title, sf::Style::Close | sf::Style::Titlebar);
@@ -27,6 +29,8 @@ namespace GE
 		// init 
 		this->init();
 
+		// end init 
+
 
 		while (_data->window.isOpen())
 		{
@@ -39,19 +43,24 @@ namespace GE
 				}
 
 				// handle input
+
+				if (event.type == sf::Event::MouseButtonPressed) _saved = 0;
+
 				if (_state == main_loop_state::work)
 				{
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
 						if ((_buttons[buttons::load].getColor() != sf::Color::Transparent ) && _buttons[buttons::load].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
+							_saveReady = 0;
 							_state = main_loop_state::read;
 						}
 
 						if ((_buttons[buttons::save].getColor() != sf::Color::Transparent) && _buttons[buttons::save].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
 							std::cout << "Pressed Save button" << std::endl;
-
+							_fManager.savepro();
+							_saved = 1;
 						}
 
 						if ((_buttons[buttons::playorg].getColor() != sf::Color::Transparent) && _buttons[buttons::playorg].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
@@ -67,6 +76,7 @@ namespace GE
 						{
 							//std::cout << "Pressed playout button" << std::endl;
 							_state = main_loop_state::playing;
+							_saveReady = 1;
 							sound.setBuffer(_fManager.getbuffpro());
 							sound.play();
 							_clock.restart();
@@ -81,7 +91,6 @@ namespace GE
 						if (_fManager.loadfile(event) == 1)
 						{
 							_loaded = 1;
-							_texts[2].setFillColor(sf::Color::Transparent);
 						}
 						else
 						{
@@ -124,11 +133,30 @@ namespace GE
 				{
 					_buttons[buttons::playorg].setColor(sf::Color::White);
 					_buttons[buttons::playout].setColor(sf::Color::White);
+					_texts[2].setFillColor(sf::Color::Transparent);
 				}
 				else
 				{
 					_buttons[buttons::playorg].setColor(sf::Color::Transparent);
 					_buttons[buttons::playout].setColor(sf::Color::Transparent);
+				}
+
+				if (_saveReady == 1)
+				{
+					_buttons[buttons::save].setColor(sf::Color::White);
+				}
+				else
+				{
+					_buttons[buttons::save].setColor(sf::Color::Transparent);
+				}
+
+				if (_saved == 1)
+				{
+					_texts[3].setFillColor(sf::Color::Green);
+				}
+				else
+				{
+					_texts[3].setFillColor(sf::Color::Transparent);
 				}
 			}
 
@@ -172,6 +200,8 @@ namespace GE
 			}
 
 			_data->window.display();
+
+			// end draw
 		}
 	}
 
@@ -229,7 +259,11 @@ namespace GE
 		txt.setString("File doesn`t exist");
 		_texts.push_back(txt);
 		_texts[2].setPosition(SCREEN_WIDHT / 2 - _texts[2].getGlobalBounds().width / 2, SCREEN_HEIGHT / 3);
+		txt.setString("File Saved");
+		_texts.push_back(txt);
+		_texts[3].setPosition(SCREEN_WIDHT / 2 - _texts[3].getGlobalBounds().width / 2, SCREEN_HEIGHT / 3);
 
 		_texts[2].setFillColor(sf::Color::Transparent);
+		_texts[3].setFillColor(sf::Color::Transparent);
 	}
 }

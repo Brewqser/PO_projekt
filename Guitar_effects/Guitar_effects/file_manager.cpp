@@ -45,6 +45,11 @@ namespace GE
 		return _processed;
 	}
 
+	void filemanager::savepro()
+	{
+		_processed.saveToFile(_filename + "_processed" + _ext);
+	}
+
 	std::string filemanager::getFileName()
 	{
 		return _filename;

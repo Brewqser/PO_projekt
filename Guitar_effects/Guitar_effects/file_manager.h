@@ -16,6 +16,8 @@ namespace GE
 		sf::SoundBuffer &getbufforg();
 		sf::SoundBuffer &getbuffpro();
 
+		void savepro();
+
 		std::string getFileName();
 
 	private:
