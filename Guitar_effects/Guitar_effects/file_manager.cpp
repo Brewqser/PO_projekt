@@ -21,7 +21,11 @@ namespace GE
 			}
 			else if ((char)event.text.unicode == 13)
 			{
-				return (int) _buffer.loadFromFile(_filename + _ext);
+				if (_buffer.loadFromFile(_filename + _ext) == 1)
+				{
+					return (int)_processed.loadFromFile(_filename + _ext);
+				}
+				else return 0;
 			}
 			else 
 			{
@@ -31,9 +35,14 @@ namespace GE
 		return 2;
 	}
 
-	sf::SoundBuffer &filemanager::playorg()
+	sf::SoundBuffer &filemanager::getbufforg()
 	{
 		return _buffer;
+	}
+	
+	sf::SoundBuffer &filemanager::getbuffpro()
+	{
+		return _processed;
 	}
 
 	std::string filemanager::getFileName()

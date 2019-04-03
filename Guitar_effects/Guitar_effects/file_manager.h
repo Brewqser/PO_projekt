@@ -13,7 +13,8 @@ namespace GE
 		filemanager();
 
 		int loadfile(sf::Event event);
-		sf::SoundBuffer &playorg();
+		sf::SoundBuffer &getbufforg();
+		sf::SoundBuffer &getbuffpro();
 
 		std::string getFileName();
 
@@ -23,5 +24,6 @@ namespace GE
 
 		std::string _ext;
 		sf::SoundBuffer _buffer;
+		sf::SoundBuffer _processed;
 	};
 }

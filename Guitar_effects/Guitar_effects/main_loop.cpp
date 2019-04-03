@@ -8,6 +8,7 @@ namespace GE
 		_state = main_loop_state::work;
 		_filename = "";
 		_isplaying = 0;
+		_loaded = 0;
 
 		sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 		_data->window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), title, sf::Style::Close | sf::Style::Titlebar);
@@ -44,51 +45,54 @@ namespace GE
 					{
 						if ((_buttons[buttons::load].getColor() != sf::Color::Transparent ) && _buttons[buttons::load].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
-							//std::cout << "Pressed Load button" << std::endl;
 							_state = main_loop_state::read;
 						}
+
 						if ((_buttons[buttons::save].getColor() != sf::Color::Transparent) && _buttons[buttons::save].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
 							std::cout << "Pressed Save button" << std::endl;
+
 						}
+
 						if ((_buttons[buttons::playorg].getColor() != sf::Color::Transparent) && _buttons[buttons::playorg].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
-							std::cout << "Pressed playorg button" << std::endl;
+							//std::cout << "Pressed playorg button" << std::endl;
 							_state = main_loop_state::playing;
-							sound.setBuffer(  fManager.playorg() ) ;
+							sound.setBuffer( _fManager.getbufforg() ) ;
 							sound.play();
+							_clock.restart();
 						}
+
 						if ((_buttons[buttons::playout].getColor() != sf::Color::Transparent) && _buttons[buttons::playout].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
-							std::cout << "Pressed playout button" << std::endl;
-
+							//std::cout << "Pressed playout button" << std::endl;
+							_state = main_loop_state::playing;
+							sound.setBuffer(_fManager.getbuffpro());
+							sound.play();
+							_clock.restart();
 						}
 					}
 				}
+
 				if (_state == main_loop_state::read)
 				{
-					//
-					if (fManager.loadfile(event) != 2)
+					if (_fManager.loadfile(event) != 2)
 					{
-						if (fManager.loadfile(event) == 1)
+						if (_fManager.loadfile(event) == 1)
 						{
-							_buttons[buttons::load].setColor(sf::Color::White);
-							_buttons[buttons::playout].setColor(sf::Color::White);
-							_buttons[buttons::playorg].setColor(sf::Color::White);
+							_loaded = 1;
 							_texts[2].setFillColor(sf::Color::Transparent);
 						}
 						else
 						{
-							_buttons[buttons::playorg].setColor(sf::Color::Transparent);
-							_buttons[buttons::pause].setColor(sf::Color::Transparent);
-							_buttons[buttons::playout].setColor(sf::Color::Transparent);
-							_buttons[buttons::save].setColor(sf::Color::Transparent);
+							_loaded = 0;
 							_texts[2].setFillColor(sf::Color::Red);
 						}
 
 						_state = main_loop_state::work;
 					}
 				}
+
 				if (_state == main_loop_state::playing)
 				{
 					if (event.type == sf::Event::MouseButtonPressed)
@@ -99,15 +103,38 @@ namespace GE
 							sound.stop();
 						}
 					}
-					// elapsed time !!!!
+
+					if (_fManager.getbufforg().getDuration().asMicroseconds() <= _clock.getElapsedTime().asMicroseconds())
+					{
+						_state = main_loop_state::work;
+						sound.stop();
+					}
 				}
+
+				// end handle input 
 			}
 
 
 			// update
+			if (_state == main_loop_state::work)
+			{
+				_buttons[buttons::load].setColor(sf::Color::White) ;
+				_buttons[buttons::pause].setColor(sf::Color::Transparent);
+				if (_loaded == 1)
+				{
+					_buttons[buttons::playorg].setColor(sf::Color::White);
+					_buttons[buttons::playout].setColor(sf::Color::White);
+				}
+				else
+				{
+					_buttons[buttons::playorg].setColor(sf::Color::Transparent);
+					_buttons[buttons::playout].setColor(sf::Color::Transparent);
+				}
+			}
+
 			if (_state == main_loop_state::read)
 			{
-				filename.setString(fManager.getFileName());
+				filename.setString(_fManager.getFileName());
 				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
 			}
 
@@ -120,10 +147,11 @@ namespace GE
 				_buttons[buttons::load].setColor(sf::Color::Transparent);
 			}
 
+			// end update 
 
 			//draw
-			_data->window.clear(sf::Color::Black);
 
+			_data->window.clear(sf::Color::Black);
 
 			if (_state == main_loop_state::read)
 			{

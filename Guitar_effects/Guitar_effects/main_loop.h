@@ -24,6 +24,7 @@ namespace GE
 		void run();
 		void init();
 
+		bool _loaded;
 		bool _isplaying;
 
 		DataRef _data = std::make_shared<Data>();
@@ -32,11 +33,12 @@ namespace GE
 
 		std::vector <sf::Text> _texts;
 		std::vector <sf::Sprite> _buttons;
+
 		sf::Texture _texture[10];
 		sf::Font _font;
-
-		filemanager fManager;
-
 		sf::Sound sound;
+		sf::Clock _clock;
+
+		filemanager _fManager;
 	};
 }
