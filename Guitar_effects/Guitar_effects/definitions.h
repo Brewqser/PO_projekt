@@ -11,6 +11,8 @@ const double power2 = std::pow(2, 15) - 1;
 #define Load_Button_Filepath "Resources/Textures/Load.jpg"
 #define Save_Button_Filepath "Resources/Textures/Save.jpg"
 
+#define Font_Filepath "Comic Sans.ttf"
+
 enum main_loop_state
 {
 	read,

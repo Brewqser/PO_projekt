@@ -2,13 +2,13 @@
 
 namespace GE
 {
-	filemanager::filemanager()
+	file_manager::file_manager()
 	{
 		_filename = "test";
 		_ext = ".wav";
 	}
 
-	int filemanager::loadfile(sf::Event event)
+	int file_manager::loadfile(sf::Event event)
 	{
 		if (event.type == sf::Event::TextEntered)
 		{
@@ -35,22 +35,22 @@ namespace GE
 		return 2;
 	}
 
-	sf::SoundBuffer &filemanager::getbufforg()
+	sf::SoundBuffer &file_manager::getbufforg()
 	{
 		return _buffer;
 	}
 	
-	sf::SoundBuffer &filemanager::getbuffpro()
+	sf::SoundBuffer &file_manager::getbuffpro()
 	{
 		return _processed;
 	}
 
-	void filemanager::savepro()
+	void file_manager::savepro()
 	{
 		_processed.saveToFile(_filename + "_processed" + _ext);
 	}
 
-	std::string filemanager::getFileName()
+	std::string file_manager::getFileName()
 	{
 		return _filename;
 	}

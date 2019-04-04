@@ -4,6 +4,7 @@
 #include "definitions.h"
 #include "string"
 #include "file_manager.h"
+#include "effect_manager.h"
 
 namespace GE
 {
@@ -41,6 +42,8 @@ namespace GE
 		sf::Sound sound;
 		sf::Clock _clock;
 
-		filemanager _fManager;
+		file_manager _fManager;
+		effect_manager _eManager;
+
 	};
 }

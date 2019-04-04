@@ -7,10 +7,10 @@
 
 namespace GE
 {
-	class filemanager
+	class file_manager
 	{
 	public:
-		filemanager();
+		file_manager();
 
 		int loadfile(sf::Event event);
 		sf::SoundBuffer &getbufforg();

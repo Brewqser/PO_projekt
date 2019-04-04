@@ -8,6 +8,7 @@
 #include "delay_effect.h"
 #include "ring_effect.h"
 #include "main_loop.h"
+#include "effect_manager.h"
 
 #include "definitions.h"
 
@@ -17,6 +18,9 @@ string path = "Sounds/test_gs.wav";
 
 int main()
 {
+
+	//GE::effect_manager man;
+	//GE::file_manager dada;
 	GE::main_loop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
 
 	/*

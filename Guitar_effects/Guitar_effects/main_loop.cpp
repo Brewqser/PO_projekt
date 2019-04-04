@@ -20,7 +20,7 @@ namespace GE
 
 	void main_loop::run()
 	{
-		_font.loadFromFile("Comic Sans.ttf");
+		_font.loadFromFile(Font_Filepath);
 
 		sf::Text filename;
 		filename.setFont(_font);
@@ -198,6 +198,8 @@ namespace GE
 					_data->window.draw(_texts[i]);
 				}
 			}
+
+			_eManager.draw(_data->window);
 
 			_data->window.display();
 
