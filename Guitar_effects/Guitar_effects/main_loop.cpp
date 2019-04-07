@@ -48,6 +48,7 @@ namespace GE
 
 				if (_state == main_loop_state::work)
 				{
+					// button check
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
 						if ((_buttons[buttons::load].getColor() != sf::Color::Transparent ) && _buttons[buttons::load].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
@@ -81,7 +82,17 @@ namespace GE
 							sound.play();
 							_clock.restart();
 						}
+
 					}
+
+					// effect check 
+					if (event.type == sf::Event::MouseButtonPressed)
+					{
+						_eManager.clicked(_data->window);
+						std::cout << _eManager.check(_data->window) << std::endl;
+					}
+
+
 				}
 
 				if (_state == main_loop_state::read)

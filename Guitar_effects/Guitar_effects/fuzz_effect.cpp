@@ -8,7 +8,7 @@ namespace GE
 {
 	fuzz_effect::fuzz_effect()
 	{
-
+		_on = 0;
 	}
 
 	void fuzz_effect::process(sf::SoundBuffer &buffer)
@@ -71,5 +71,15 @@ namespace GE
 
 		buffer.loadFromSamples(&Y[0], buffer.getSampleCount(), 1, buffer.getSampleRate());
 
+	}
+
+	bool fuzz_effect::getOn()
+	{
+		return _on;
+	}
+
+	void fuzz_effect::flipOn()
+	{
+		_on = !_on;
 	}
 }

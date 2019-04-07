@@ -6,7 +6,7 @@ namespace GE
 {
 	wah_wah_effect::wah_wah_effect()
 	{
-
+		_on = 0;
 	}
 
 	void wah_wah_effect::process(sf::SoundBuffer &buffer)
@@ -66,5 +66,15 @@ namespace GE
 		}
 
 		buffer.loadFromSamples( &Y[0], buffer.getSampleCount(), 1, buffer.getSampleRate());
+	}
+
+	bool wah_wah_effect::getOn()
+	{
+		return _on;
+	}
+
+	void wah_wah_effect::flipOn()
+	{
+		_on = !_on;
 	}
 }

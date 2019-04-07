@@ -23,7 +23,8 @@ int main()
 	//GE::file_manager dada;
 	GE::main_loop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
 
-	/*
+/*
+	
 	sf::SoundBuffer buffer;
 	if ( buffer.loadFromFile("test.wav") )  cout << " dziala " << endl;
 	else
@@ -35,23 +36,23 @@ int main()
 	cout << buffer.getSampleCount() << " " << buffer.getSampleRate() << " " <<  (double)buffer.getSampleCount() / (double) buffer.getSampleRate() << " " << buffer.getChannelCount();
 	cout << endl << buffer.getDuration().asMilliseconds() << endl;
 
-	//std::unique_ptr<GE::effect> eff;
+	std::unique_ptr<GE::effect> eff;
 
 
 	sf::Sound sound;
 	sound.setBuffer(buffer);
 	sound.play();
 
-	/*
+	
 	//sound.play();
 
-//	int a;
-	//cin >> a;
+	int a;
+	cin >> a;
 
 
-	eff = make_unique <GE::delay_effect>();
+	//eff = make_unique <GE::delay_effect>();
 
-	eff->process(buffer);
+	//eff->process(buffer);
 	eff = make_unique <GE::wah_wah_effect> ();
 	eff->process(buffer);
 	//eff = make_unique <GE::fuzz_effect>();
@@ -61,8 +62,9 @@ int main()
 
 	sound.setBuffer(buffer);
 	sound.play();
-	*/
 
-	//system("pause");
+	system("pause");
+	
+	*/
 }
 

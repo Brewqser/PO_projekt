@@ -13,6 +13,8 @@ const double power2 = std::pow(2, 15) - 1;
 
 #define Font_Filepath "Comic Sans.ttf"
 
+#define gray sf::Color(80,80,80)
+
 enum main_loop_state
 {
 	read,

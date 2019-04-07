@@ -7,7 +7,7 @@ namespace GE
 {
 	delay_effect::delay_effect()
 	{
-
+		_on = 0;
 	}
 
 	void delay_effect::process(sf::SoundBuffer &buffer)
@@ -35,5 +35,15 @@ namespace GE
 		
 		buffer.loadFromSamples(&Y[0], buffer.getSampleCount(), 1, buffer.getSampleRate());
 
+	}
+
+	bool delay_effect::getOn()
+	{
+		return _on;
+	}
+
+	void delay_effect::flipOn()
+	{
+		_on = !_on;
 	}
 }

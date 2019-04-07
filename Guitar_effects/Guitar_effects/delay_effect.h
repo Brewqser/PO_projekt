@@ -10,8 +10,10 @@ namespace GE
 		delay_effect();
 
 		void process(sf::SoundBuffer &buffer);
+		bool getOn();
+		void flipOn();
 
 	protected:
-
+		bool _on;
 	};
 }

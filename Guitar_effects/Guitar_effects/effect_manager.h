@@ -18,7 +18,8 @@ namespace GE
 	public:
 		effect_manager();
 
-		void add();
+		void clicked(sf::RenderWindow &window);
+		int check(sf::RenderWindow &window);
 		void edit();
 		void changeOrder();
 
@@ -27,6 +28,6 @@ namespace GE
 	private:
 		sf::Font _font;
 		std::vector < std::unique_ptr<effect> > _effects;
-		std::vector <sf::Text> _txt;
+		std::vector < std::pair <sf::Text, int> > _txt;
 	};
 }

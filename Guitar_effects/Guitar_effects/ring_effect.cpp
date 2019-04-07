@@ -7,7 +7,7 @@ namespace GE
 {
 	ring_effect::ring_effect()
 	{
-
+		_on = 0;
 	}
 
 	void ring_effect::process(sf::SoundBuffer &buffer)
@@ -26,5 +26,15 @@ namespace GE
 
 		buffer.loadFromSamples(&Y[0], buffer.getSampleCount(), 1, buffer.getSampleRate());
 
+	}
+
+	bool ring_effect::getOn()
+	{
+		return _on;
+	}
+
+	void ring_effect::flipOn()
+	{
+		_on = !_on;
 	}
 }
