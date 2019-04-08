@@ -76,6 +76,7 @@ namespace GE
 						if ((_buttons[buttons::playout].getColor() != sf::Color::Transparent) && _buttons[buttons::playout].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
 							//std::cout << "Pressed playout button" << std::endl;
+							_eManager.process(_fManager.loadpro());
 							_state = main_loop_state::playing;
 							_saveReady = 1;
 							sound.setBuffer(_fManager.getbuffpro());
@@ -88,8 +89,19 @@ namespace GE
 					// effect check 
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
-						_eManager.clicked(_data->window);
-						std::cout << _eManager.check(_data->window) << std::endl;
+						if (_eManager.clicked(_data->window))_saveReady = 0 ;
+						
+						//std::cout << _eManager.check(_data->window) << std::endl;
+
+						std::cout << _saveReady << std::endl;
+					}
+
+					if (event.type == sf::Event::KeyPressed)
+					{
+						if (_eManager.pressed(_data->window, event.key.code)) _saveReady = 0;
+						
+						//_eManager.clicked(_data->window, );
+						//std::cout << _eManager.check(_data->window) << std::endl;
 					}
 
 
@@ -210,7 +222,7 @@ namespace GE
 				}
 			}
 
-			_eManager.draw(_data->window);
+			if (_state == main_loop_state::work && _loaded == 1 && _saved == 0) _eManager.draw(_data->window);
 
 			_data->window.display();
 

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <memory>
 
 #include "effect.h"
@@ -18,10 +19,11 @@ namespace GE
 	public:
 		effect_manager();
 
-		void clicked(sf::RenderWindow &window);
+		bool clicked(sf::RenderWindow &window);
+		bool pressed(sf::RenderWindow &window, sf::Keyboard::Key key);
 		int check(sf::RenderWindow &window);
-		void edit();
-		void changeOrder();
+
+		void process(sf::SoundBuffer &sound);
 
 		void draw(sf::RenderWindow &window);
 
