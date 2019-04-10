@@ -15,7 +15,7 @@ const double power2 = std::pow(2, 15) - 1;
 
 #define gray sf::Color(80,80,80)
 
-enum main_loop_state
+enum MainLoop_state
 {
 	read,
 	work,

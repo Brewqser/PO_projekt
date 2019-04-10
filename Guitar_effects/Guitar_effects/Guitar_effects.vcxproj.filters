@@ -18,54 +18,54 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wah_wah_effect.cpp">
+    <ClCompile Include="DelayEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fuzz_effect.cpp">
+    <ClCompile Include="EffectManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="delay_effect.cpp">
+    <ClCompile Include="FileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ring_effect.cpp">
+    <ClCompile Include="FuzzEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main_loop.cpp">
+    <ClCompile Include="MainLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="file_manager.cpp">
+    <ClCompile Include="RingEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="effect_manager.cpp">
+    <ClCompile Include="WahWahEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wah_wah_effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fuzz_effect.h">
+    <ClInclude Include="DelayEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="delay_effect.h">
+    <ClInclude Include="EffectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ring_effect.h">
+    <ClInclude Include="FileManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main_loop.h">
+    <ClInclude Include="FuzzEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="file_manager.h">
+    <ClInclude Include="MainLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="effect_manager.h">
+    <ClInclude Include="RingEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WahWahEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

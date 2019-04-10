@@ -2,13 +2,13 @@
 #include <iostream>
 #include <string>
 #include <memory>
-#include "effect.h"
-#include "wah_wah_effect.h"
-#include "fuzz_effect.h"
-#include "delay_effect.h"
-#include "ring_effect.h"
-#include "main_loop.h"
-#include "effect_manager.h"
+#include "Effect.h"
+#include "WahWahEffect.h"
+#include "FuzzEffect.h"
+#include "DelayEffect.h"
+#include "RingEffect.h"
+#include "MainLoop.h"
+#include "EffectManager.h"
 
 #include "definitions.h"
 
@@ -18,10 +18,7 @@ string path = "Sounds/test_gs.wav";
 
 int main()
 {
-
-	//GE::effect_manager man;
-	//GE::file_manager dada;
-	GE::main_loop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
+	GE::MainLoop( SCREEN_WIDHT, SCREEN_HEIGHT , "Guitar Effect");
 
 /*
 	
@@ -36,7 +33,7 @@ int main()
 	cout << buffer.getSampleCount() << " " << buffer.getSampleRate() << " " <<  (double)buffer.getSampleCount() / (double) buffer.getSampleRate() << " " << buffer.getChannelCount();
 	cout << endl << buffer.getDuration().asMilliseconds() << endl;
 
-	std::unique_ptr<GE::effect> eff;
+	std::unique_ptr<GE::Effect> eff;
 
 
 	sf::Sound sound;
@@ -50,14 +47,14 @@ int main()
 	cin >> a;
 
 
-	//eff = make_unique <GE::delay_effect>();
+	//eff = make_unique <GE::DelayEffect>();
 
 	//eff->process(buffer);
-	eff = make_unique <GE::wah_wah_effect> ();
+	eff = make_unique <GE::WahWahEffect> ();
 	eff->process(buffer);
-	//eff = make_unique <GE::fuzz_effect>();
+	//eff = make_unique <GE::FuzzEffect>();
 	//eff->process(buffer);
-	//eff = make_unique <GE::ring_effect>(); 
+	//eff = make_unique <GE::RingEffect>(); 
 	//eff->process(buffer);
 
 	sound.setBuffer(buffer);

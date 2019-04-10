@@ -3,7 +3,7 @@
 
 namespace GE
 {
-	class effect 
+	class Effect
 	{
 	public:
 
