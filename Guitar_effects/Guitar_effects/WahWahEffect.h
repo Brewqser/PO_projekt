@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Effect.h"
 
@@ -14,8 +15,11 @@ namespace GE
 		void process( sf::SoundBuffer &buffer );
 		bool getOn();
 		void flipOn();
+		int edit(sf::Event event);
+		double getW();
 
 	protected:
 		bool _on;
+		double _Fw;
 	};
 }

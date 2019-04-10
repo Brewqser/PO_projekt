@@ -21,7 +21,10 @@ namespace GE
 
 		bool clicked(sf::RenderWindow &window);
 		bool pressed(sf::RenderWindow &window, sf::Keyboard::Key key);
+		int pressedE(sf::RenderWindow &window, sf::Keyboard::Key key);
 		int check(sf::RenderWindow &window);
+		int edit(int ef , sf::Event event);
+		std::string getW(int ef);
 
 		void process(sf::SoundBuffer &sound);
 

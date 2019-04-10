@@ -1,6 +1,7 @@
 #include "EffectManager.h"
 
 #include <iostream>
+#include <string>
 
 namespace GE
 {
@@ -102,6 +103,21 @@ namespace GE
 		return 0;
 	}
 
+	int EffectManager::pressedE(sf::RenderWindow &window, sf::Keyboard::Key key)
+	{
+		int pre = this->check(window);
+
+		if (pre != -1)
+		{
+			if (key == sf::Keyboard::Key::E)
+			{
+				return pre;
+			}
+		}
+
+		return -1;
+	}
+
 	int EffectManager::check(sf::RenderWindow &window)
 	{
 		for (unsigned int i = 0; i < _txt.size(); i++)
@@ -124,6 +140,16 @@ namespace GE
 				_Effects[_txt[i].second]->process(sound);
 			}
 		}
+	}
+
+	int EffectManager::edit(int ef, sf::Event event)
+	{
+		return _Effects[_txt[ef].second]->edit(event);
+	}
+
+	std::string EffectManager::getW(int ef)
+	{
+		return std::to_string((int)_Effects[_txt[ef].second]->getW());
 	}
 
 	void EffectManager::draw(sf::RenderWindow &window)

@@ -29,6 +29,7 @@ namespace GE
 		bool _saveReady;
 		bool _saved;
 		bool _isplaying;
+		int _edi;
 
 		DataRef _data = std::make_shared<Data>();
 		MainLoop_state _state;

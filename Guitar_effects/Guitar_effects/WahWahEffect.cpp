@@ -1,5 +1,7 @@
 #include "WahWahEffect.h"
 
+//#include <iostream>
+
 #include "definitions.h"
 
 namespace GE
@@ -7,6 +9,7 @@ namespace GE
 	WahWahEffect::WahWahEffect()
 	{
 		_on = 0;
+		_Fw = 2000.f;
 	}
 
 	void WahWahEffect::process(sf::SoundBuffer &buffer)
@@ -14,7 +17,6 @@ namespace GE
 		double damp = 0.05;
 		double minf = 500.f;
 		double maxf = 3000.f;
-		double Fw = 2000.f;
 
 
 		std::vector <double> F1;
@@ -23,7 +25,7 @@ namespace GE
 		std::vector <double> yl;
 		std::vector <sf::Int16> Y;
 
-		double delta = Fw / buffer.getSampleRate();
+		double delta = _Fw / buffer.getSampleRate();
 
 		double tmp = (maxf - minf) / delta;
 
@@ -76,5 +78,33 @@ namespace GE
 	void WahWahEffect::flipOn()
 	{
 		_on = !_on;
+	}
+
+	int WahWahEffect::edit(sf::Event event)
+	{
+		if (event.type == sf::Event::TextEntered)
+		{
+			if ((char)event.text.unicode == 8)
+			{
+				_Fw /= 10;
+				_Fw = (int)_Fw;
+			}
+			else if ((char)event.text.unicode == 13)
+			{
+				_Fw = std::max(_Fw, (double)1);
+				_Fw = std::min(_Fw, (double)1000000);
+				return 1;
+			}
+			else if ((char)event.text.unicode >= '0' && (char)event.text.unicode <= '9')
+			{
+				if ( _Fw <=1000000) _Fw = _Fw * 10 + (int)(char)event.text.unicode - 48;
+			}
+		}
+		return 0;
+	}
+
+	double WahWahEffect::getW()
+	{
+		return _Fw;
 	}
 }

@@ -12,6 +12,7 @@ namespace GE
 		_loaded = 0;
 		_saveReady = 0;
 		_saved = 0;
+		_edi = -1;
 
 		sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 		_data->window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), title, sf::Style::Close | sf::Style::Titlebar);
@@ -90,25 +91,35 @@ namespace GE
 						
 						//std::cout << _eManager.check(_data->window) << std::endl;
 
-						std::cout << _saveReady << std::endl;
+						//std::cout << _saveReady << std::endl;
 					}
 
 					if (event.type == sf::Event::KeyPressed && _saved == 0)
 					{
 						if (_eManager.pressed(_data->window, event.key.code)) _saveReady = 0;
 						
+						_edi = _eManager.pressedE(_data->window, event.key.code);
+					
+						//std::cout << _edi << std::endl;
+
+						if (_edi != -1)
+						{
+							_saveReady = 0;
+							_state = MainLoop_state::editing;
+						}
+
 						//_eManager.clicked(_data->window, );
 						//std::cout << _eManager.check(_data->window) << std::endl;
 					}
-
 
 				}
 
 				if (_state == MainLoop_state::read)
 				{
-					if (_fManager.loadfile(event) != 2)
+					int tmp = _fManager.loadfile(event);
+					if (tmp != 2)
 					{
-						if (_fManager.loadfile(event) == 1)
+						if (tmp == 1)
 						{
 							_loaded = 1;
 						}
@@ -139,7 +150,18 @@ namespace GE
 						sound.stop();
 					}
 				}
+				
+				if (_state == MainLoop_state::editing)
+				{
+					//edit 
+					int tmp = _eManager.edit(_edi,event);
 
+					if (tmp == 1)
+					{
+						_edi = -1;
+						_state = MainLoop_state::work;
+					}
+				}
 				// end handle input 
 			}
 
@@ -186,6 +208,12 @@ namespace GE
 				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
 			}
 
+			if (_state == MainLoop_state::editing)
+			{
+				filename.setString(_eManager.getW(_edi));
+				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
+			}
+
 			if (_state == MainLoop_state::playing)
 			{
 				_buttons[buttons::playorg].setColor(sf::Color::Transparent);
@@ -210,7 +238,7 @@ namespace GE
 
 			_data->window.clear(sf::Color::Black);
 
-			if (_state == MainLoop_state::read)
+			if (_state == MainLoop_state::read || _edi != -1 )
 			{
 				_data->window.draw(filename);
 			}

@@ -20,7 +20,8 @@ enum MainLoop_state
 	read,
 	work,
 	playing,
-	processing
+	processing,
+	editing
 };
 
 enum buttons
