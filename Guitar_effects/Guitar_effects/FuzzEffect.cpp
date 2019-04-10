@@ -1,8 +1,9 @@
 #include "FuzzEffect.h"
 
-#include "definitions.h"
 #include <iostream>
 #include <math.h>
+
+#include "definitions.h"
 
 namespace GE
 {

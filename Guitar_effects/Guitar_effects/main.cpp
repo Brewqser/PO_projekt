@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+
 #include "Effect.h"
 #include "WahWahEffect.h"
 #include "FuzzEffect.h"
@@ -14,7 +15,7 @@
 
 using namespace std;
 
-string path = "Sounds/test_gs.wav";
+//string path = "Sounds/test_gs.wav";
 
 int main()
 {

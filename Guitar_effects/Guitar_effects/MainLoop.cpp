@@ -1,4 +1,5 @@
 #include "MainLoop.h"
+
 #include <iostream>
 
 namespace GE
@@ -76,12 +77,8 @@ namespace GE
 						if ((_buttons[buttons::playout].getColor() != sf::Color::Transparent) && _buttons[buttons::playout].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
 							//std::cout << "Pressed playout button" << std::endl;
-							_eManager.process(_fManager.loadpro());
-							_state = MainLoop_state::playing;
-							_saveReady = 1;
-							sound.setBuffer(_fManager.getbuffpro());
-							sound.play();
-							_clock.restart();
+							_state = MainLoop_state::processing;
+							
 						}
 
 					}
@@ -198,6 +195,15 @@ namespace GE
 				_buttons[buttons::load].setColor(sf::Color::Transparent);
 			}
 
+			if (_state == MainLoop_state::processing)
+			{
+				_texts[4].setFillColor(sf::Color::Yellow);
+			}
+			else
+			{
+				_texts[4].setFillColor(sf::Color::Transparent);
+			}
+
 			// end update 
 
 			//draw
@@ -209,7 +215,7 @@ namespace GE
 				_data->window.draw(filename);
 			}
 
-			if (_state == MainLoop_state::work || _state == MainLoop_state::playing )
+			if (_state == MainLoop_state::work || _state == MainLoop_state::playing  || _state == MainLoop_state::processing)
 			{
 				for (unsigned int i = 0; i < _buttons.size(); i++)
 				{
@@ -227,6 +233,20 @@ namespace GE
 			_data->window.display();
 
 			// end draw
+
+			// processing
+
+			if (_state == MainLoop_state::processing)
+			{
+				_eManager.process(_fManager.loadpro());
+				_state = MainLoop_state::playing;
+				_saveReady = 1;
+				sound.setBuffer(_fManager.getbuffpro());
+				sound.play();
+				_clock.restart();
+			}
+
+			// emd processing 
 		}
 	}
 
@@ -287,8 +307,12 @@ namespace GE
 		txt.setString("File Saved");
 		_texts.push_back(txt);
 		_texts[3].setPosition(SCREEN_WIDHT / 2 - _texts[3].getGlobalBounds().width / 2, SCREEN_HEIGHT / 3);
+		txt.setString("Processing!");
+		_texts.push_back(txt);
+		_texts[4].setPosition(SCREEN_WIDHT / 2 - _texts[4].getGlobalBounds().width / 2, SCREEN_HEIGHT * 2 / 3);
 
 		_texts[2].setFillColor(sf::Color::Transparent);
 		_texts[3].setFillColor(sf::Color::Transparent);
+		_texts[4].setFillColor(sf::Color::Transparent);
 	}
 }

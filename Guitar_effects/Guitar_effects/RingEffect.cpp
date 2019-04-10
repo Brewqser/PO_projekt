@@ -1,7 +1,8 @@
 #include "RingEffect.h"
 
-#include "definitions.h"
 #include <iostream>
+
+#include "definitions.h"
 
 namespace GE
 {

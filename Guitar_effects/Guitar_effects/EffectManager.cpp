@@ -1,4 +1,5 @@
 #include "EffectManager.h"
+
 #include <iostream>
 
 namespace GE

@@ -19,8 +19,8 @@ enum MainLoop_state
 {
 	read,
 	work,
-	process,
-	playing
+	playing,
+	processing
 };
 
 enum buttons

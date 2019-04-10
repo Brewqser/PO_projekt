@@ -1,7 +1,8 @@
 #include "DelayEffect.h"
 
-#include "definitions.h"
 #include <iostream>
+
+#include "definitions.h"
 
 namespace GE
 {
