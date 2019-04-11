@@ -266,7 +266,7 @@ namespace GE
 
 			if (_state == MainLoop_state::processing)
 			{
-				_eManager.process(_fManager.loadpro());
+				if ( _saveReady == 0 ) _eManager.process(_fManager.loadpro());
 				_state = MainLoop_state::playing;
 				_saveReady = 1;
 				sound.setBuffer(_fManager.getbuffpro());

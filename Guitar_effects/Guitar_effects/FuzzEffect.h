@@ -12,11 +12,11 @@ namespace GE
 		void process(sf::SoundBuffer &buffer);
 		bool getOn();
 		void flipOn();
-		int edit(sf::Event event) { return 0; };
-		double getW() { return 0; }
+		int edit(sf::Event event);
+		double getW();
 
 	protected:
 		bool _on;
-
+		double _mix;
 	};
 }

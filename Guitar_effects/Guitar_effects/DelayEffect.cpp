@@ -9,6 +9,7 @@ namespace GE
 	DelayEffect::DelayEffect()
 	{
 		_on = 0;
+		_M = 100;
 	}
 
 	void DelayEffect::process(sf::SoundBuffer &buffer)
@@ -17,7 +18,8 @@ namespace GE
 		double BL = 0.5 ;
 		double FB = -0.5;
 		double FF = 1.0;
-		double M = 0.1;
+		double M = _M / 1000;
+		
 
 		int delaysize = (int) (buffer.getSampleRate() * M);
 
@@ -46,5 +48,33 @@ namespace GE
 	void DelayEffect::flipOn()
 	{
 		_on = !_on;
+	}
+
+	int DelayEffect::edit(sf::Event event)
+	{
+		if (event.type == sf::Event::TextEntered)
+		{
+			if ((char)event.text.unicode == 8)
+			{
+				_M /= 10;
+				_M = (int)_M;
+			}
+			else if ((char)event.text.unicode == 13)
+			{
+				_M = std::max(_M, (double)0);
+				_M = std::min(_M, (double)1000);
+				return 1;
+			}
+			else if ((char)event.text.unicode >= '0' && (char)event.text.unicode <= '9')
+			{
+				if (_M <= 1000) _M = _M * 10 + (int)(char)event.text.unicode - 48;
+			}
+		}
+		return 0;
+	}
+
+	double DelayEffect::getW()
+	{
+		return _M;
 	}
 }
