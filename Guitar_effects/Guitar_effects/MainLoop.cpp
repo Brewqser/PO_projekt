@@ -204,14 +204,24 @@ namespace GE
 
 			if (_state == MainLoop_state::read)
 			{
+				_texts[5].setFillColor(sf::Color::White);
 				filename.setString(_fManager.getFileName());
 				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
+			}
+			else
+			{
+				_texts[5].setFillColor(sf::Color::Transparent);
 			}
 
 			if (_state == MainLoop_state::editing)
 			{
+				_texts[6].setFillColor(sf::Color::White);
 				filename.setString(_eManager.getW(_edi));
 				filename.setPosition((SCREEN_WIDHT / 2) - (filename.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - 17 /* filename.getGlobalBounds().height / 2*/);
+			}
+			else
+			{
+				_texts[6].setFillColor(sf::Color::Transparent);
 			}
 
 			if (_state == MainLoop_state::playing)
@@ -240,6 +250,8 @@ namespace GE
 
 			if (_state == MainLoop_state::read || _edi != -1 )
 			{
+				_data->window.draw(_texts[5]);
+				_data->window.draw(_texts[6]);
 				_data->window.draw(filename);
 			}
 
@@ -338,9 +350,17 @@ namespace GE
 		txt.setString("Processing!");
 		_texts.push_back(txt);
 		_texts[4].setPosition(SCREEN_WIDHT / 2 - _texts[4].getGlobalBounds().width / 2, SCREEN_HEIGHT * 2 / 3);
+		txt.setString("Enter file name");
+		_texts.push_back(txt);
+		_texts[5].setPosition(SCREEN_WIDHT / 2 - _texts[5].getGlobalBounds().width / 2, SCREEN_HEIGHT / 6);
+		txt.setString("Edit effect walue");
+		_texts.push_back(txt);
+		_texts[6].setPosition(SCREEN_WIDHT / 2 - _texts[6].getGlobalBounds().width / 2, SCREEN_HEIGHT / 6);
 
 		_texts[2].setFillColor(sf::Color::Transparent);
 		_texts[3].setFillColor(sf::Color::Transparent);
 		_texts[4].setFillColor(sf::Color::Transparent);
+		_texts[5].setFillColor(sf::Color::Transparent);
+		_texts[6].setFillColor(sf::Color::Transparent);
 	}
 }
