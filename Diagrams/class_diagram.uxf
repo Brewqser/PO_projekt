@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>250</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>definicions</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>710</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>WahWahEffect
+--
+#_on: bool 
+#_Fw: double
+--
++WahWahEffect()
++process( sf::SoundBuffer &amp;buffer )
++flipOn()
++getOn(): bool 
++edit(sf::Event event): int
++getW(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>230</y>
+      <w>210</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>FileManager
+--
+-_filename: std::string 
+-_ext: std::string 
+-_buffer: sf::SoundBuffer 
+-_out: sf::SoundBuffer 
+--
++FileManager()
++loadfile(sf::Event event): int
++&amp;getbufforg(): sf::SoundBuffer 
++&amp;getbuffpro(): sf::SoundBuffer 
++&amp;loadpro(): sf::SoundBuffer 
++savepro()
++getFileName(): std::string 
+		</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>460</y>
+      <w>430</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>EffectManager
+--
+-_font: sf::Font
+-_Effects: std::vector &lt; std::unique_ptr&lt;Effect&gt; &gt; 
+-_txt: std::vector &lt; std::pair &lt;sf::Text, int&gt; &gt; 
+--
++EffectManager();
++clicked(sf::RenderWindow &amp;window): bool 
++pressed(sf::RenderWindow &amp;window, sf::Keyboard::Key key): bool 
++pressedE(sf::RenderWindow &amp;window, sf::Keyboard::Key key): int 
++check(sf::RenderWindow &amp;window): int 
++edit(int ef , sf::Event event): int 
++getW(int ef): std::string 
++process(sf::SoundBuffer &amp;sound)
++draw(sf::RenderWindow &amp;window)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>150</y>
+      <w>300</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>MainLoop
+--
+-_loaded: bool
+-_saveReady: bool 
+-_saved: bool 
+-_isplaying: bool 
+-_edi: int
+-_data: std::shared_ptr&lt;Data&gt;
+-_state: MainLoop_state 
+-_filename: std::string 
+-_texts: std::vector &lt;sf::Text&gt; 
+-_buttons: std::vector &lt;sf::Sprite&gt; 
+-_texture[10]: sf::Texture 
+-_font: sf::Font 
+-_sound: sf::Sound 
+-_clock: sf::Clock 
+-_fManager: FileManager 
+-_eManager: EffectManager 
+--
+-MainLoop(int width, int height, std::string title)
+-run()
+-init()
+		</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>300</y>
+      <w>280</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>360</y>
+      <w>180</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>570</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=4
+m2=1</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>640</y>
+      <w>270</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Effect
+{abstract}
+--
+
+--
++virtual process( sf::SoundBuffer &amp;buffer )
++virtualflipOn()
++virtual getOn(): bool 
++virtual edit(sf::Event event): int
++virtual getW(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>920</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>DelayEffect
+--
+#_on: bool 
+#_M: double
+--
++DelayEffect()
++process( sf::SoundBuffer &amp;buffer )
++flipOn()
++getOn(): bool 
++edit(sf::Event event): int
++getW(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>920</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>FuzzEffect
+--
+#_on: bool 
+#_mix: double
+--
++FuzzEffect()
++process( sf::SoundBuffer &amp;buffer )
++flipOn()
++getOn(): bool 
++edit(sf::Event event): int
++getW(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>920</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>RingEffect
+--
+#_on: bool 
+#_Fc: double
+--
++RingEffect()
++process( sf::SoundBuffer &amp;buffer )
++flipOn()
++getOn(): bool 
++edit(sf::Event event): int
++getW(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>780</y>
+      <w>30</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>830</y>
+      <w>390</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;370.0;10.0;370.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>830</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>830</y>
+      <w>50</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>250</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>150</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Data
+--
+
+--
++window: sf::RenderWindow </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>190</y>
+      <w>280</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -70,8 +70,8 @@ namespace GE
 						{
 							//std::cout << "Pressed playorg button" << std::endl;
 							_state = MainLoop_state::playing;
-							sound.setBuffer( _fManager.getbufforg() ) ;
-							sound.play();
+							_sound.setBuffer( _fManager.getbufforg() ) ;
+							_sound.play();
 							_clock.restart();
 						}
 
@@ -140,14 +140,14 @@ namespace GE
 						if ((_buttons[buttons::pause].getColor() != sf::Color::Transparent) && _buttons[buttons::pause].getGlobalBounds().contains(_data->window.mapPixelToCoords(sf::Mouse::getPosition(_data->window))))
 						{
 							_state = MainLoop_state::work;
-							sound.stop();
+							_sound.stop();
 						}
 					}
 
 					if (_fManager.getbufforg().getDuration().asMicroseconds() <= _clock.getElapsedTime().asMicroseconds())
 					{
 						_state = MainLoop_state::work;
-						sound.stop();
+						_sound.stop();
 					}
 				}
 				
@@ -281,8 +281,8 @@ namespace GE
 				if ( _saveReady == 0 ) _eManager.process(_fManager.loadpro());
 				_state = MainLoop_state::playing;
 				_saveReady = 1;
-				sound.setBuffer(_fManager.getbuffpro());
-				sound.play();
+				_sound.setBuffer(_fManager.getbuffpro());
+				_sound.play();
 				_clock.restart();
 			}
 

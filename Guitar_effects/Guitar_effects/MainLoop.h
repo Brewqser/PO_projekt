@@ -40,7 +40,7 @@ namespace GE
 
 		sf::Texture _texture[10];
 		sf::Font _font;
-		sf::Sound sound;
+		sf::Sound _sound;
 		sf::Clock _clock;
 
 		FileManager _fManager;
