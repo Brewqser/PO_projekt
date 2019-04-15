@@ -105,7 +105,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\SFML VS\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
